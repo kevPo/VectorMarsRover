@@ -5,11 +5,13 @@ namespace MarsRover
 {
     public class Rover
     {
-        public const Char NORTH = 'N';
-        public const Char SOUTH = 'S';
-        public const Char EAST =  'E';
-        public const Char WEST =  'W';
-        
+        private const Char NORTH = 'N';
+        private const Char SOUTH = 'S';
+        private const Char EAST =  'E';
+        private const Char WEST =  'W';
+        private const Int32 FORWARD = 1;
+        private const Int32 BACKWARD = -1;
+
         private Int32 X;
         private Int32 Y;
         private Char direction;
@@ -25,6 +27,20 @@ namespace MarsRover
         public String GetCurrentPosition()
         {
             return String.Join(",", new Int32[] { X, Y });
+        }
+
+        public void MoveBackward()
+        {
+            if (FacingNorth())
+                Y--;
+            else if (FacingSouth())
+                Y++;
+            else if (FacingEast())
+                X--;
+            else if (FacingWest())
+                X++;
+            else
+                throw new InvalidOperationException("Current direction of rover is unrecognizable");
         }
 
         public void MoveForward()
