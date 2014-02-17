@@ -13,7 +13,7 @@ namespace MarsRover
         
         public MarsRover(Int32 planetSize, String roverStartingPoint, Char direction)
         {
-            rover = new Rover(roverStartingPoint, direction);
+            rover = new Rover(roverStartingPoint, direction, planetSize);
         }
 
         public String GetRoverPosition()

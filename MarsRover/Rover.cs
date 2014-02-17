@@ -1,6 +1,6 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
+
 namespace MarsRover
 {
     public class Rover
@@ -15,13 +15,17 @@ namespace MarsRover
         private Int32 X;
         private Int32 Y;
         private Char direction;
+        private Int32 positiveBorder;
+        private Int32 negativeBorder;
 
-        public Rover(String initialPosition, Char initialDirection)
+        public Rover(String initialPosition, Char initialDirection, Int32 planetSize)
         {
             var coordinates = initialPosition.Split(',');
             X = Int32.Parse(coordinates[0]);
             Y = Int32.Parse(coordinates[1]);
             direction = initialDirection;
+            positiveBorder = planetSize / 2;
+            negativeBorder = planetSize / 2 - planetSize;
         }
 
         public String GetCurrentPosition()
@@ -77,11 +81,35 @@ namespace MarsRover
         private void Move(Int32 movement)
         {
             if (FacingNorth() || FacingSouth())
+            {
                 Y += movement;
+                if (Y > positiveBorder || Y < negativeBorder)
+                    WrapAroundXAxis();
+            }
             else if (FacingEast() || FacingWest())
+            {
                 X += movement;
+                if (X > positiveBorder || X < negativeBorder)
+                    WrapAroundYAxis();
+            }
             else
                 throw new InvalidOperationException("Current direction of rover is unrecognizable");
+        }
+
+        private void WrapAroundXAxis()
+        {
+            if (Y > positiveBorder)
+                Y = negativeBorder;
+            else
+                Y = positiveBorder;
+        }
+
+        private void WrapAroundYAxis()
+        {
+            if (X > positiveBorder)
+                X = negativeBorder;
+            else
+                X = positiveBorder;
         }
 
         private Boolean FacingNorth()
