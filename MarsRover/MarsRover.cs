@@ -6,7 +6,7 @@ namespace MarsRover
     {
         private Rover rover;
         
-        public MarsRover(Int32 planetSize, String roverStartingPoint, String direction)
+        public MarsRover(Int32 planetSize, String roverStartingPoint, Char direction)
         {
             rover = new Rover(roverStartingPoint, direction);
         }
