@@ -29,6 +29,30 @@ namespace MarsRover
             return String.Join(",", new Int32[] { X, Y });
         }
 
+        public void TurnRight()
+        {
+            if (FacingNorth())
+                direction = EAST;
+            else if (FacingEast())
+                direction = SOUTH;
+            else if (FacingSouth())
+                direction = WEST;
+            else 
+                direction = NORTH;
+        }
+
+        public void TurnLeft()
+        {
+            if (FacingNorth())
+                direction = WEST;
+            else if (FacingEast())
+                direction = NORTH;
+            else if (FacingSouth())
+                direction = EAST;
+            else
+                direction = SOUTH;
+        }
+
         public void MoveBackward()
         {
             if (FacingNorth())

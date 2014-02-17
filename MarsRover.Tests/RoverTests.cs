@@ -86,5 +86,29 @@ namespace MarsRover.Tests
             Assert.That(exception.Message, Is.EqualTo("Current direction of rover is unrecognizable"));
         }
 
+        [Test]
+        public void TestTurnRoverRightFromNorth()
+        {
+            var rover = new Rover("0,0", 'N');
+            rover.TurnRight();
+            rover.TurnRight();
+            rover.TurnRight();
+            rover.TurnRight();
+            rover.MoveForward();
+            Assert.That(rover.GetCurrentPosition(), Is.EqualTo("0,1"));
+        }
+
+        [Test]
+        public void TestTurnLeftFromNorth()
+        {
+            var rover = new Rover("0,0", 'N');
+            rover.TurnLeft();
+            rover.TurnLeft();
+            rover.TurnLeft();
+            rover.TurnLeft();
+            rover.MoveForward();
+            Assert.That(rover.GetCurrentPosition(), Is.EqualTo("0,1"));
+        }
+
     }
 }
