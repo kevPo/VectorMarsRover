@@ -8,12 +8,12 @@ namespace MarsRover
         
         public MarsRover(Int32 planetSize, String roverStartingPoint, String direction)
         {
-            
+            rover = new Rover(roverStartingPoint, direction);
         }
 
         public String GetRoverPosition()
         {
-            return "0,0";
+            return rover.GetCurrentPosition();
         }
     }
 }
