@@ -19,5 +19,13 @@ namespace MarsRover.Tests
             var marsRover = new MarsRover(100, "4,4", 'N');
             Assert.That(marsRover.GetRoverPosition(), Is.EqualTo("4,4"));
         }
+
+        [Test]
+        public void TestMoveRoverWithCommands()
+        {
+            var marsRover = new MarsRover(100, "0,0", 'N');
+            marsRover.MoveRover("ffrff");
+            Assert.That(marsRover.GetRoverPosition(), Is.EqualTo("2,2"));
+        }
     }
 }

@@ -9,8 +9,8 @@ namespace MarsRover
         private const Char SOUTH = 'S';
         private const Char EAST =  'E';
         private const Char WEST =  'W';
-        private const Int32 FORWARD = 1;
-        private const Int32 BACKWARD = -1;
+        private const Int32 POSITIVE_DIRECTION = 1;
+        private const Int32 NEGATIVE_DIRECTION = -1;
 
         private Int32 X;
         private Int32 Y;
@@ -55,28 +55,31 @@ namespace MarsRover
 
         public void MoveBackward()
         {
-            if (FacingNorth())
-                Y--;
-            else if (FacingSouth())
-                Y++;
-            else if (FacingEast())
-                X--;
-            else if (FacingWest())
-                X++;
+            if (FacingPositiveDirection())
+                Move(NEGATIVE_DIRECTION);
             else
-                throw new InvalidOperationException("Current direction of rover is unrecognizable");
+                Move(POSITIVE_DIRECTION);
         }
 
         public void MoveForward()
         {
-            if (FacingNorth())
-                Y++;
-            else if (FacingSouth())
-                Y--;
-            else if (FacingEast())
-                X++;
-            else if (FacingWest())
-                X--;
+            if (FacingPositiveDirection())
+                Move(POSITIVE_DIRECTION);
+            else
+                Move(NEGATIVE_DIRECTION);
+        }
+
+        private bool FacingPositiveDirection()
+        {
+            return FacingNorth() || FacingEast();
+        }
+
+        private void Move(Int32 movement)
+        {
+            if (FacingNorth() || FacingSouth())
+                Y += movement;
+            else if (FacingEast() || FacingWest())
+                X += movement;
             else
                 throw new InvalidOperationException("Current direction of rover is unrecognizable");
         }
