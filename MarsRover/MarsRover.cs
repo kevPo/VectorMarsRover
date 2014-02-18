@@ -26,9 +26,7 @@ namespace MarsRover
             var commandSequence = commands.ToCharArray();
 
             for (var i = 0; i < commandSequence.Length; i++)
-            {
                 CommandRover(commandSequence[i]);
-            }
         }
 
         private void CommandRover(Char command)

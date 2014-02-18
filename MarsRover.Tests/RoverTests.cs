@@ -157,8 +157,5 @@ namespace MarsRover.Tests
             rover.MoveForward();
             Assert.That(rover.GetCurrentPosition(), Is.EqualTo("0,25"));
         }
-
-
-
     }
 }
