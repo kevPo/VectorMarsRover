@@ -6,13 +6,13 @@ namespace MarsRover
 {
     public class Planet
     {
-        public List<String> Obstacles;
+        public List<Point> Obstacles;
         private Int32 size;
 
         public Int32 PositiveBorder { get { return size / 2; } }
         public Int32 NegativeBorder { get { return size / 2 - size; } }
 
-        public Planet(Int32 planetSize, IEnumerable<String> obstacles)
+        public Planet(Int32 planetSize, IEnumerable<Point> obstacles)
         {
             if (planetSize % 2 != 0)
                 size = planetSize - 1;

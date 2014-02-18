@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MarsRover
 {
@@ -12,25 +13,20 @@ namespace MarsRover
         private const Int32 POSITIVE_DIRECTION = 1;
         private const Int32 NEGATIVE_DIRECTION = -1;
 
-        private Int32 X;
-        private Int32 Y;
+        private Point currentPoint;
         private Char direction;
-        private Int32 positiveBorder;
-        private Int32 negativeBorder;
+        private Planet planet;
 
-        public Rover(String initialPosition, Char initialDirection, Int32 planetSize)
+        public Rover(Point initialPosition, Char initialDirection, Planet planet)
         {
-            var coordinates = initialPosition.Split(',');
-            X = Int32.Parse(coordinates[0]);
-            Y = Int32.Parse(coordinates[1]);
+            currentPoint = initialPosition;
             direction = initialDirection;
-            positiveBorder = planetSize / 2;
-            negativeBorder = planetSize / 2 - planetSize;
+            this.planet = planet;
         }
 
         public String GetCurrentPosition()
         {
-            return String.Join(",", new Int32[] { X, Y });
+            return currentPoint.ToString();
         }
 
         public void TurnRight()
@@ -73,7 +69,7 @@ namespace MarsRover
                 Move(NEGATIVE_DIRECTION);
         }
 
-        private bool FacingPositiveDirection()
+        private Boolean FacingPositiveDirection()
         {
             return FacingNorth() || FacingEast();
         }
@@ -82,34 +78,47 @@ namespace MarsRover
         {
             if (FacingNorth() || FacingSouth())
             {
-                Y += movement;
-                if (Y > positiveBorder || Y < negativeBorder)
-                    WrapAroundXAxis();
+                MoveTo(currentPoint.X, currentPoint.Y + movement);
             }
             else if (FacingEast() || FacingWest())
             {
-                X += movement;
-                if (X > positiveBorder || X < negativeBorder)
-                    WrapAroundYAxis();
+                MoveTo(currentPoint.X + movement, currentPoint.Y);
             }
             else
                 throw new InvalidOperationException("Current direction of rover is unrecognizable");
+
+            HandleWrapping();
         }
 
-        private void WrapAroundXAxis()
+        private void MoveTo(Int32 x, Int32 y)
         {
-            if (Y > positiveBorder)
-                Y = negativeBorder;
-            else
-                Y = positiveBorder;
+            if (PositionHasObstacle(x, y))
+            {
+                throw new BlockedByObstacleException(String.Format("Obstacle was encountered at {0}, rover stopped at {1}",
+                    String.Join(",", new[] { x, y }), currentPoint.ToString()));
+            }
+            currentPoint.X = x;
+            currentPoint.Y = y;
         }
 
-        private void WrapAroundYAxis()
+        private void HandleWrapping()
         {
-            if (X > positiveBorder)
-                X = negativeBorder;
-            else
-                X = positiveBorder;
+            if (currentPoint.Y > planet.PositiveBorder)
+                currentPoint.Y = planet.NegativeBorder;
+
+            if (currentPoint.Y < planet.NegativeBorder)
+                currentPoint.Y = planet.PositiveBorder;
+
+            if (currentPoint.X > planet.PositiveBorder)
+                currentPoint.X = planet.NegativeBorder;
+
+            if (currentPoint.X < planet.NegativeBorder)
+                currentPoint.X = planet.PositiveBorder;
+        }
+
+        private Boolean PositionHasObstacle(Int32 x, Int32 y)
+        {
+            return planet.Obstacles.Any(o => o.X == x && o.Y == y);
         }
 
         private Boolean FacingNorth()

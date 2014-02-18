@@ -11,9 +11,9 @@ namespace MarsRover
 
         private Rover rover;
         
-        public MarsRover(Int32 planetSize, String roverStartingPoint, Char direction)
+        public MarsRover(Planet planet, Point roverStartingPoint, Char direction)
         {
-            rover = new Rover(roverStartingPoint, direction, planetSize);
+            rover = new Rover(roverStartingPoint, direction, planet);
         }
 
         public String GetRoverPosition()
@@ -21,12 +21,22 @@ namespace MarsRover
             return rover.GetCurrentPosition();
         }
 
-        public void MoveRover(String commands)
+        public String MoveRover(String commands)
         {
-            var commandSequence = commands.ToCharArray();
+            try
+            {
+                var commandSequence = commands.ToCharArray();
 
-            for (var i = 0; i < commandSequence.Length; i++)
-                CommandRover(commandSequence[i]);
+                for (var i = 0; i < commandSequence.Length; i++)
+                    CommandRover(commandSequence[i]);
+
+                return "Sucess!";
+            }
+            catch (BlockedByObstacleException exception)
+            {
+                return exception.Message;
+            }
+            
         }
 
         private void CommandRover(Char command)
