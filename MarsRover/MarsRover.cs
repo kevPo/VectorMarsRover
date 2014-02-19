@@ -11,9 +11,9 @@ namespace MarsRover
 
         private Rover rover;
         
-        public MarsRover(Planet planet, Point roverStartingPoint, Char direction)
+        public MarsRover(Planet planet, RoverLocation roverLocation)
         {
-            rover = new Rover(roverStartingPoint, direction, planet);
+            rover = new Rover(roverLocation, planet);
         }
 
         public String GetRoverPosition()

@@ -6,21 +6,15 @@ namespace MarsRover
 {
     public class Rover
     {
-        private const Char NORTH = 'N';
-        private const Char SOUTH = 'S';
-        private const Char EAST =  'E';
-        private const Char WEST =  'W';
         private const Int32 POSITIVE_DIRECTION = 1;
         private const Int32 NEGATIVE_DIRECTION = -1;
 
-        private Point currentPoint;
-        private Char direction;
+        private RoverLocation currentPoint;
         private Planet planet;
 
-        public Rover(Point initialPosition, Char initialDirection, Planet planet)
+        public Rover(RoverLocation roverLocation, Planet planet)
         {
-            currentPoint = initialPosition;
-            direction = initialDirection;
+            currentPoint = roverLocation;
             this.planet = planet;
         }
 
@@ -32,25 +26,25 @@ namespace MarsRover
         public void TurnRight()
         {
             if (FacingNorth())
-                direction = EAST;
+                currentPoint.Direction = Direction.East;
             else if (FacingEast())
-                direction = SOUTH;
+                currentPoint.Direction = Direction.South;
             else if (FacingSouth())
-                direction = WEST;
+                currentPoint.Direction = Direction.West;
             else 
-                direction = NORTH;
+                currentPoint.Direction = Direction.North;
         }
 
         public void TurnLeft()
         {
             if (FacingNorth())
-                direction = WEST;
+                currentPoint.Direction = Direction.West;
             else if (FacingEast())
-                direction = NORTH;
+                currentPoint.Direction = Direction.North;
             else if (FacingSouth())
-                direction = EAST;
+                currentPoint.Direction = Direction.East;
             else
-                direction = SOUTH;
+                currentPoint.Direction = Direction.South;
         }
 
         public void MoveBackward()
@@ -123,22 +117,22 @@ namespace MarsRover
 
         private Boolean FacingNorth()
         {
-            return direction == 'N';
+            return currentPoint.Direction == Direction.North;
         }
 
         private Boolean FacingSouth()
         {
-            return direction == 'S';
+            return currentPoint.Direction == Direction.South;
         }
 
         private Boolean FacingEast()
         {
-            return direction == 'E';
+            return currentPoint.Direction == Direction.East;
         }
         
         private Boolean FacingWest()
         {
-            return direction == 'W';
+            return currentPoint.Direction == Direction.West;
         }
     }
 }
