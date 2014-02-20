@@ -74,6 +74,11 @@
     <Compile Include="PointTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoverTests.cs" />
+    <Compile Include="StateFactoryTests.cs" />
+    <Compile Include="States.Tests\FacingEastTests.cs" />
+    <Compile Include="States.Tests\FacingNorthTests.cs" />
+    <Compile Include="States.Tests\FacingSouthTests.cs" />
+    <Compile Include="States.Tests\FacingWestTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

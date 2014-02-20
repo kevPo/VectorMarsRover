@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MarsRover
 {
     public class Planet
     {
-        public List<Point> Obstacles;
+        public IEnumerable<Point> Obstacles;
         private Int32 size;
 
         public Int32 PositiveBorder { get { return size / 2; } }
@@ -19,7 +18,7 @@ namespace MarsRover
             else
                 size = planetSize;
             
-            Obstacles = obstacles.ToList();
+            Obstacles = obstacles;
         }
     }
 }
