@@ -11,9 +11,9 @@ namespace MarsRover
         private const Char right = 'r';
         private Rover rover;
         
-        public MarsRover(Planet planet, String initialPosition, Char initialDirection, IStateFactory stateFactory)
+        public MarsRover(Planet planet, String initialPosition, Char initialDirection)
         {
-            rover = new Rover(new Point(initialPosition), initialDirection, stateFactory, planet);
+            rover = new Rover(new Point(initialPosition), initialDirection, planet);
         }
 
         public String GetRoverPosition()

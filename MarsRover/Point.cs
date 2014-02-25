@@ -10,6 +10,12 @@ namespace MarsRover
         public Point()
         {}
 
+        public Point(Int32 x, Int32 y)
+        {
+            this.X = x;
+            this.Y = y;
+        }
+
         public Point(String rawCoordinates)
         {
             var coordinates = rawCoordinates.Split(',');

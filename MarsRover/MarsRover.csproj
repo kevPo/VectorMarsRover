@@ -39,19 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IStateFactory.cs" />
-    <Compile Include="StateFactory.cs" />
-    <Compile Include="States\FacingEast.cs" />
-    <Compile Include="States\State.cs" />
-    <Compile Include="States\FacingNorth.cs" />
-    <Compile Include="States\ObstructedState.cs" />
-    <Compile Include="States\FacingSouth.cs" />
-    <Compile Include="States\FacingWest.cs" />
     <Compile Include="MarsRover.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Planet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rover.cs" />
+    <Compile Include="Vector.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

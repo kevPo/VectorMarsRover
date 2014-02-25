@@ -8,20 +8,18 @@ namespace MarsRover.Tests
     {
         private Planet planet;
         private Point pointAtZeroZero;
-        private IStateFactory stateFactory;
 
         [SetUp]
         public void SetUp()
         {
             planet = new Planet(50, Enumerable.Empty<Point>());
             pointAtZeroZero = new Point { X = 0, Y = 0 };
-            stateFactory = new StateFactory();
         }
 
         [Test]
         public void TestMoveRoverForwardNorth()
         {
-            var rover = new Rover(pointAtZeroZero, 'N', stateFactory, planet);
+            var rover = new Rover(pointAtZeroZero, 'N', planet);
             rover.MoveForward();
             Assert.That(rover.GetCurrentPosition().ToString(), Is.EqualTo("0,1"));
         }
@@ -29,7 +27,7 @@ namespace MarsRover.Tests
         [Test]
         public void TestMoveRoverForwardEast()
         {
-            var rover = new Rover(pointAtZeroZero, 'E', stateFactory, planet);
+            var rover = new Rover(pointAtZeroZero, 'E', planet);
             rover.MoveForward();
             Assert.That(rover.GetCurrentPosition().ToString(), Is.EqualTo("1,0"));
         }
@@ -37,7 +35,7 @@ namespace MarsRover.Tests
         [Test]
         public void TestMoveRoverForwardSouth()
         {
-            var rover = new Rover(pointAtZeroZero, 'S', stateFactory, planet);
+            var rover = new Rover(pointAtZeroZero, 'S', planet);
             rover.MoveForward();
             Assert.That(rover.GetCurrentPosition().ToString(), Is.EqualTo("0,-1"));
         }
@@ -45,7 +43,7 @@ namespace MarsRover.Tests
         [Test]
         public void TestMoveRoverForwardWest()
         {
-            var rover = new Rover(pointAtZeroZero, 'W', stateFactory, planet);
+            var rover = new Rover(pointAtZeroZero, 'W', planet);
             rover.MoveForward();
             Assert.That(rover.GetCurrentPosition().ToString(), Is.EqualTo("-1,0"));
         }
@@ -53,7 +51,7 @@ namespace MarsRover.Tests
         [Test]
         public void TestMoveRoverMoveBackwardSouth()
         {
-            var rover = new Rover(pointAtZeroZero, 'S', stateFactory, planet);
+            var rover = new Rover(pointAtZeroZero, 'S', planet);
             rover.MoveBackward();
             Assert.That(rover.GetCurrentPosition().ToString(), Is.EqualTo("0,1"));
         }
@@ -61,7 +59,7 @@ namespace MarsRover.Tests
         [Test]
         public void TestMoveRoverMoveBackwardEast()
         {
-            var rover = new Rover(pointAtZeroZero, 'E', stateFactory, planet);
+            var rover = new Rover(pointAtZeroZero, 'E', planet);
             rover.MoveBackward();
             Assert.That(rover.GetCurrentPosition().ToString(), Is.EqualTo("-1,0"));
         }
@@ -69,7 +67,7 @@ namespace MarsRover.Tests
         [Test]
         public void TestMoveRoverMoveBackwardWest()
         {
-            var rover = new Rover(pointAtZeroZero, 'W', stateFactory, planet);
+            var rover = new Rover(pointAtZeroZero, 'W', planet);
             rover.MoveBackward();
             Assert.That(rover.GetCurrentPosition().ToString(), Is.EqualTo("1,0"));
         }
@@ -77,7 +75,7 @@ namespace MarsRover.Tests
         [Test]
         public void TestMoveRoverMoveBackwardNorth()
         {
-            var rover = new Rover(pointAtZeroZero, 'N', stateFactory, planet);
+            var rover = new Rover(pointAtZeroZero, 'N', planet);
             rover.MoveBackward();
             Assert.That(rover.GetCurrentPosition().ToString(), Is.EqualTo("0,-1"));
         }
@@ -85,7 +83,7 @@ namespace MarsRover.Tests
         [Test]
         public void TestTurnRoverRightFromNorth()
         {
-            var rover = new Rover(pointAtZeroZero, 'N', stateFactory, planet);
+            var rover = new Rover(pointAtZeroZero, 'N', planet);
             rover.TurnRight();
             rover.TurnRight();
             rover.TurnRight();
@@ -97,7 +95,7 @@ namespace MarsRover.Tests
         [Test]
         public void TestTurnLeftFromNorth()
         {
-            var rover = new Rover(pointAtZeroZero, 'N', stateFactory, planet);
+            var rover = new Rover(pointAtZeroZero, 'N', planet);
             rover.TurnLeft();
             rover.TurnLeft();
             rover.TurnLeft();
@@ -109,7 +107,7 @@ namespace MarsRover.Tests
         [Test]
         public void TestRoverWrapsAroundXAxisMovingForwardEast()
         {
-            var rover = new Rover(new Point { X = 25, Y = 0 }, 'E', stateFactory, planet);
+            var rover = new Rover(new Point { X = 25, Y = 0 }, 'E', planet);
             rover.MoveForward();
             Assert.That(rover.GetCurrentPosition().ToString(), Is.EqualTo("-25,0"));
         }
@@ -117,7 +115,7 @@ namespace MarsRover.Tests
         [Test]
         public void TestRoverWrapsAroundXAxisMovingForwardWest()
         {
-            var rover = new Rover(new Point { X = -25, Y = 0 }, 'W', stateFactory, planet);
+            var rover = new Rover(new Point { X = -25, Y = 0 }, 'W', planet);
             rover.MoveForward();
             Assert.That(rover.GetCurrentPosition().ToString(), Is.EqualTo("25,0"));
         }
@@ -125,7 +123,7 @@ namespace MarsRover.Tests
         [Test]
         public void TestRoverWrapsAroundXAxisMovingBackwardWest()
         {
-            var rover = new Rover(new Point { X = 25, Y = 0 }, 'W', stateFactory, planet);
+            var rover = new Rover(new Point { X = 25, Y = 0 }, 'W', planet);
             rover.MoveBackward();
             Assert.That(rover.GetCurrentPosition().ToString(), Is.EqualTo("-25,0"));
         }
@@ -133,7 +131,7 @@ namespace MarsRover.Tests
         [Test]
         public void TestRoverWrapsAroundXAxisMovingBackwardEast()
         {
-            var rover = new Rover(new Point { X = -25, Y = 0 }, 'E', stateFactory, planet);
+            var rover = new Rover(new Point { X = -25, Y = 0 }, 'E', planet);
             rover.MoveBackward();
             Assert.That(rover.GetCurrentPosition().ToString(), Is.EqualTo("25,0"));
         }
@@ -141,7 +139,7 @@ namespace MarsRover.Tests
         [Test]
         public void TestRoverWrapsAroundYAxisMovingForwardNorth()
         {
-            var rover = new Rover(new Point { X = 0, Y = 25 }, 'N', stateFactory, planet);
+            var rover = new Rover(new Point { X = 0, Y = 25 }, 'N', planet);
             rover.MoveForward();
             Assert.That(rover.GetCurrentPosition().ToString(), Is.EqualTo("0,-25"));
         }
@@ -149,7 +147,7 @@ namespace MarsRover.Tests
         [Test]
         public void TestRoverWrapsAroundYAxisMovingForwardSouth()
         {
-            var rover = new Rover(new Point { X = 0, Y = -25 }, 'S', stateFactory, planet);
+            var rover = new Rover(new Point { X = 0, Y = -25 }, 'S', planet);
             rover.MoveForward();
             Assert.That(rover.GetCurrentPosition().ToString(), Is.EqualTo("0,25"));
         }
@@ -157,7 +155,7 @@ namespace MarsRover.Tests
         [Test]
         public void TestRoverWrapsAroundYAxisMovingBackwardSouth()
         {
-            var rover = new Rover(new Point { X = 0, Y = 25 }, 'S', stateFactory, planet);
+            var rover = new Rover(new Point { X = 0, Y = 25 }, 'S', planet);
             rover.MoveBackward();
             Assert.That(rover.GetCurrentPosition().ToString(), Is.EqualTo("0,-25"));
         }
@@ -165,7 +163,7 @@ namespace MarsRover.Tests
         [Test]
         public void TestRoverWrapsAroundYAxisMovingBackwardNorth()
         {
-            var rover = new Rover(new Point { X = 0, Y = -25 }, 'N', stateFactory, planet);
+            var rover = new Rover(new Point { X = 0, Y = -25 }, 'N', planet);
             rover.MoveBackward();
             Assert.That(rover.GetCurrentPosition().ToString(), Is.EqualTo("0,25"));
         }
@@ -175,7 +173,7 @@ namespace MarsRover.Tests
         {
             var obstructionPoint = new Point { X = 2, Y = 2 };
             var planetWithObstacles = new Planet(50, new Point[] { obstructionPoint });
-            var rover = new Rover(new Point { X = 2, Y = 1 }, 'N', stateFactory, planetWithObstacles);
+            var rover = new Rover(new Point { X = 2, Y = 1 }, 'N', planetWithObstacles);
             rover.MoveForward();
 
             Assert.That(rover.IsObstructed, Is.EqualTo(true));
@@ -188,7 +186,7 @@ namespace MarsRover.Tests
         {
             var obstructionPoint = new Point { X = 2, Y = 2 };
             var planetWithObstacles = new Planet(50, new Point[] { obstructionPoint });
-            var rover = new Rover(new Point { X = 3, Y = 2 }, 'W', stateFactory, planetWithObstacles);
+            var rover = new Rover(new Point { X = 3, Y = 2 }, 'W', planetWithObstacles);
             rover.MoveForward();
 
             Assert.That(rover.IsObstructed, Is.EqualTo(true));
