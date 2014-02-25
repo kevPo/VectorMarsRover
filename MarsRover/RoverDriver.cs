@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace MarsRover
 {
-    public class MarsRover
+    public class RoverDriver
     {
         private const Char forward = 'f';
         private const Char backward = 'b';
@@ -11,9 +11,9 @@ namespace MarsRover
         private const Char right = 'r';
         private Rover rover;
         
-        public MarsRover(Planet planet, String initialPosition, Char initialDirection)
+        public RoverDriver(Rover rover)
         {
-            rover = new Rover(new Point(initialPosition), initialDirection, planet);
+            this.rover = rover;
         }
 
         public String GetRoverPosition()

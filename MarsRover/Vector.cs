@@ -20,6 +20,27 @@ namespace MarsRover
             return new Vector(vector1.X - vector2.X, vector1.Y - vector2.Y);
         }
 
+        public Vector MinusRadians(Double radians)
+        {
+            var radianValue = Math.Atan2(Y, X);
+            var result = radianValue - radians;
+            return CreateAndNormalizeVectorFor(result);
+        }
+
+        public Vector PlusRadians(Double radians)
+        {
+            var radianValue = Math.Atan2(Y, X);
+            var result = radianValue + radians;
+            return CreateAndNormalizeVectorFor(result);
+        }
+
+        private Vector CreateAndNormalizeVectorFor(double result)
+        {
+            var diffVector = new Vector((Int32)Math.Cos(result), (Int32)Math.Sin(result));
+            diffVector.Normalize();
+            return diffVector;
+        }
+
         public Vector Normalize()
         {
             var length = Length();
@@ -50,7 +71,7 @@ namespace MarsRover
 
         public override Int32 GetHashCode()
         {
-            return base.GetHashCode();
+            return X.GetHashCode() + Y.GetHashCode() * 23;
         }
     }
 }

@@ -69,7 +69,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="MarsRoverTests.cs" />
+    <Compile Include="RoverDriverTests.cs" />
     <Compile Include="PlanetTests.cs" />
     <Compile Include="PointTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
